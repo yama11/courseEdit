@@ -1,2 +1,2 @@
-# dt.courseEdit.vue - 课件高级编辑
+# 课件高级编辑
 

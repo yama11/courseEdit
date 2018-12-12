@@ -30,14 +30,14 @@ export default new Vuex.Store({
     },
 
     typeList: [
-      { label: 'empty模式', value: 'empty' },
-      { label: 'boot模式', value: 'boot' },
-      { label: 'television模式', value: 'television' },
-      { label: 'teaching模式', value: 'teaching' },
-      { label: 'flashcard模式', value: 'flashcard' },
-      { label: 'game模式', value: 'game' },
-      { label: 'cocos模式', value: 'cocos' },
-      { label: 'celebrate模式', value: 'celebrate' },
+      { label: 'empty类型', value: 'empty' },
+      { label: 'boot类型', value: 'boot' },
+      { label: 'television类型', value: 'television' },
+      { label: 'teaching类型', value: 'teaching' },
+      { label: 'flashcard类型', value: 'flashcard' },
+      { label: 'game类型', value: 'game' },
+      { label: 'cocos类型', value: 'cocos' },
+      { label: 'celebrate类型', value: 'celebrate' },
     ],
   },
 

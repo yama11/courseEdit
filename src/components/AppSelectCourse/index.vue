@@ -22,30 +22,43 @@ export default {
   data() {
     return {
       dialogVisible: false,
+
+      courseList: {
+        image: [11, 12, 13],
+        audio: [2],
+        video: [3],
+        animate: [21],
+      },
+
+      titleList: {
+        audio: '音频',
+        video: '视频',
+        animate: '动画',
+      },
     };
   },
 
   computed: {
     courseArr() {
-      if (this.courseType === 'image') {
-        return [11, 12, 13];
-      }
+      const typeData = this.courseList[this.courseType];
 
-      if (this.courseType === 'audio') {
-        return [2];
-      }
+      return typeData || [];
+    },
 
-      if (this.courseType === 'video') {
-        return [3];
-      }
+    selectTitle() {
+      const titleData = this.titleList[this.courseType];
 
-      return [];
+      return titleData || '';
     },
 
     courseName() {
       const name = this.value.split('/');
 
-      return name[name.length - 1];
+      const isAnimate = this.courseType === 'animate';
+
+      return isAnimate
+        ? `${name[name.length - 2]}.zip`
+        : name[name.length - 1];
     },
   },
 
@@ -72,19 +85,11 @@ export default {
     </div>
 
     <el-button
-      v-if="courseType === 'audio'"
+      v-if="selectTitle"
       type="primary"
       size="small"
       @click="selectCourse">
-      选择音频
-    </el-button>
-
-    <el-button
-      v-if="courseType === 'video'"
-      type="primary"
-      size="small"
-      @click="selectCourse">
-      选择视频
+      选择{{ selectTitle }}
     </el-button>
 
     <div>

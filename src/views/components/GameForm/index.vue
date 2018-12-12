@@ -72,10 +72,10 @@ export default {
     @dialogHide="$emit('changeDialog')">
 
     <el-form-item
-      label="模式">
+      label="类型">
       <el-select
         v-model="initForm.type"
-        placeholder="请选择模式"
+        placeholder="请选择类型"
         @change="changeType(initForm.type)">
         <el-option
           v-for="item in courseTypeList"

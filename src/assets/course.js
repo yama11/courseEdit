@@ -19,6 +19,37 @@ export default {
         title: 'Family',
       },
     },
+    {
+      // 类型：闪卡环节，目前有四种模式
+      type: 'flashcard',
+      // 模式一
+      mode: 1,
+      scene: {
+        background: './static/theme/card-background.png',
+        foreground: '',
+      },
+      // 模式一：四张有可带文字的卡牌按照投票排名顺序翻转
+      src: {
+        cards: [
+          {
+            url: './static/course/teaching02/mom.png',
+            text: 'mom',
+          },
+          {
+            url: './static/course/teaching02/dad.png',
+            text: 'dad',
+          },
+          {
+            url: './static/course/teaching02/brother.png',
+            text: 'brother',
+          },
+          {
+            url: './static/course/teaching02/sister.png',
+            text: 'sister',
+          },
+        ],
+      },
+    },
   ],
   warmup: [
     {

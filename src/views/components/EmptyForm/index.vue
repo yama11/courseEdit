@@ -1,11 +1,11 @@
 <script>
 /**
- * @overview TeachingForm表单
+ * @overview empty表单
  *
  * @author suyanping
  */
 export default {
-  name: 'TeachingForm',
+  name: 'EmptyForm',
 
   props: {
     dataForm: {
@@ -22,15 +22,11 @@ export default {
   data() {
     return {
       initForm: {
-        type: 'teaching',
+        type: 'empty',
         scene: {
           background: '',
           foreground: '',
         },
-      },
-
-      formRules: {
-
       },
 
     };
@@ -64,18 +60,17 @@ export default {
   <AppForm
     :visible="isShow"
     :model="initForm"
-    :rules="formRules"
-    object="Teaching编辑"
-    class="teaching-form"
+    object="Empty编辑"
+    class="empty-form"
     label-width="80px"
     @on-submit="submitForm"
     @dialogHide="$emit('changeDialog')">
 
     <el-form-item
-      label="模式">
+      label="类型">
       <el-select
         v-model="initForm.type"
-        placeholder="请选择模式"
+        placeholder="请选择类型"
         @change="changeType(initForm.type)">
         <el-option
           v-for="item in courseTypeList"
@@ -105,7 +100,7 @@ export default {
 </template>
 
 <style lang="postcss">
-.teaching-form{
+.empty-form{
 
 }
 </style>

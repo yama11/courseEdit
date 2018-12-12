@@ -1,11 +1,11 @@
 <script>
 /**
- * @overview CelebrateForm表单
+ * @overview television表单
  *
  * @author suyanping
  */
 export default {
-  name: 'CelebrateForm',
+  name: 'TelevisionForm',
 
   props: {
     dataForm: {
@@ -22,10 +22,13 @@ export default {
   data() {
     return {
       initForm: {
-        type: 'celebrate',
+        type: 'television',
         scene: {
           background: '',
           foreground: '',
+        },
+        src: {
+          video: '',
         },
       },
 
@@ -65,17 +68,17 @@ export default {
     :visible="isShow"
     :model="initForm"
     :rules="formRules"
-    object="Celebrate编辑"
-    class="celebrate-form"
+    object="Television编辑"
+    class="television-form"
     label-width="80px"
     @on-submit="submitForm"
     @dialogHide="$emit('changeDialog')">
 
     <el-form-item
-      label="模式">
+      label="类型">
       <el-select
         v-model="initForm.type"
-        placeholder="请选择模式"
+        placeholder="请选择类型"
         @change="changeType(initForm.type)">
         <el-option
           v-for="item in courseTypeList"
@@ -101,11 +104,18 @@ export default {
       </el-form-item>
     </div>
 
+    <el-form-item
+      label="视频">
+      <AppSelectCourse
+        v-model="initForm.src.video"
+        course-type="video"/>
+    </el-form-item>
+
   </AppForm>
 </template>
 
 <style lang="postcss">
-.celebrate-form{
+.television-form{
 
 }
 </style>

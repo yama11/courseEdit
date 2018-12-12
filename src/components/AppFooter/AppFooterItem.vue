@@ -18,14 +18,14 @@ export default {
   data() {
     return {
       typeObj: {
-        empty: 'empty模式',
-        boot: 'boot模式',
-        television: 'television模式',
-        teaching: 'teaching模式',
-        flashcard: 'flashcard模式',
-        game: 'game模式',
-        cocos: 'cocos模式',
-        celebrate: 'celebrate模式',
+        empty: 'empty类型',
+        boot: 'boot类型',
+        television: 'television类型',
+        teaching: 'teaching类型',
+        flashcard: 'flashcard类型',
+        game: 'game类型',
+        cocos: 'cocos类型',
+        celebrate: 'celebrate类型',
       },
 
       iconIndex: null,
@@ -94,17 +94,21 @@ export default {
       @mouseout="hideAction">
 
       <div
-        :style="getBackStyle(item.scene)"
         class="app-footer-item__block">
 
         <div
-          slot="foreground"
           class="app-footer-item__content">
 
           <div>
+            <i class="el-icon-picture app-footer-item__icon"/>
+            <br>
             {{ sectionName }} 环节
             <br>
-            {{ typeObj[item.type] }} {{ item.mode }}
+            {{ typeObj[item.type] }}
+            <br>
+            <span v-if="item.mode">
+              模式{{ item.mode }}
+            </span>
           </div>
 
           <div
@@ -149,7 +153,6 @@ export default {
   height: 145px;
   margin-top: 2px;
   flex-shrink: 0;
-  background-image:
 }
 
 .app-footer-item__currentStep{
@@ -159,15 +162,17 @@ export default {
 .app-footer-item__block{
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
   position: relative;
 }
 
 .app-footer-item__content{
-  font-size: 20px;
+  height: 100%;
   text-align: center;
   background: rgba(255,255,255,0.3);
+}
+
+.app-footer-item__icon{
+  font-size: 65px;
 }
 
 .app-footer-item__action{

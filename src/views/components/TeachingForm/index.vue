@@ -1,11 +1,11 @@
 <script>
 /**
- * @overview television表单
+ * @overview TeachingForm表单
  *
  * @author suyanping
  */
 export default {
-  name: 'TelevisionForm',
+  name: 'TeachingForm',
 
   props: {
     dataForm: {
@@ -22,13 +22,10 @@ export default {
   data() {
     return {
       initForm: {
-        type: 'television',
+        type: 'teaching',
         scene: {
           background: '',
           foreground: '',
-        },
-        src: {
-          video: '',
         },
       },
 
@@ -68,17 +65,17 @@ export default {
     :visible="isShow"
     :model="initForm"
     :rules="formRules"
-    object="Television编辑"
-    class="television-form"
+    object="Teaching编辑"
+    class="teaching-form"
     label-width="80px"
     @on-submit="submitForm"
     @dialogHide="$emit('changeDialog')">
 
     <el-form-item
-      label="模式">
+      label="类型">
       <el-select
         v-model="initForm.type"
-        placeholder="请选择模式"
+        placeholder="请选择类型"
         @change="changeType(initForm.type)">
         <el-option
           v-for="item in courseTypeList"
@@ -104,18 +101,11 @@ export default {
       </el-form-item>
     </div>
 
-    <el-form-item
-      label="视频">
-      <AppSelectCourse
-        v-model="initForm.src.video"
-        course-type="video"/>
-    </el-form-item>
-
   </AppForm>
 </template>
 
 <style lang="postcss">
-.television-form{
+.teaching-form{
 
 }
 </style>

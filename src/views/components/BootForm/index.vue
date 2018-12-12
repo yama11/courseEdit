@@ -1,11 +1,11 @@
 <script>
 /**
- * @overview empty表单
+ * @overview boot表单
  *
  * @author suyanping
  */
 export default {
-  name: 'EmptyForm',
+  name: 'BootForm',
 
   props: {
     dataForm: {
@@ -21,16 +21,18 @@ export default {
 
   data() {
     return {
+      state: this.$store.state,
+
       initForm: {
-        type: 'empty',
+        type: 'boot',
         scene: {
           background: '',
           foreground: '',
         },
-      },
-
-      formRules: {
-
+        src: {
+          index: '',
+          title: '',
+        },
       },
 
     };
@@ -64,18 +66,17 @@ export default {
   <AppForm
     :visible="isShow"
     :model="initForm"
-    :rules="formRules"
-    object="Empty编辑"
-    class="empty-form"
+    object="Boot编辑"
+    class="boot-form"
     label-width="80px"
     @on-submit="submitForm"
     @dialogHide="$emit('changeDialog')">
 
     <el-form-item
-      label="模式">
+      label="类型">
       <el-select
         v-model="initForm.type"
-        placeholder="请选择模式"
+        placeholder="请选择类型"
         @change="changeType(initForm.type)">
         <el-option
           v-for="item in courseTypeList"
@@ -101,11 +102,19 @@ export default {
       </el-form-item>
     </div>
 
+    <el-form-item label="课件课序">
+      <el-input v-model="initForm.src.index"/>
+    </el-form-item>
+
+    <el-form-item label="课时标题">
+      <el-input v-model="initForm.src.title"/>
+    </el-form-item>
+
   </AppForm>
 </template>
 
 <style lang="postcss">
-.empty-form{
+.boot-form{
 
 }
 </style>

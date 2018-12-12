@@ -1,11 +1,11 @@
 <script>
 /**
- * @overview FlashcardForm表单
+ * @overview CelebrateForm表单
  *
  * @author suyanping
  */
 export default {
-  name: 'FlashcardForm',
+  name: 'CelebrateForm',
 
   props: {
     dataForm: {
@@ -22,15 +22,11 @@ export default {
   data() {
     return {
       initForm: {
-        type: 'flashcard',
+        type: 'celebrate',
         scene: {
           background: '',
           foreground: '',
         },
-      },
-
-      formRules: {
-
       },
 
     };
@@ -64,18 +60,17 @@ export default {
   <AppForm
     :visible="isShow"
     :model="initForm"
-    :rules="formRules"
-    object="Flashcard编辑"
-    class="flashcard-form"
+    object="Celebrate编辑"
+    class="celebrate-form"
     label-width="80px"
     @on-submit="submitForm"
     @dialogHide="$emit('changeDialog')">
 
     <el-form-item
-      label="模式">
+      label="类型">
       <el-select
         v-model="initForm.type"
-        placeholder="请选择模式"
+        placeholder="请选择类型"
         @change="changeType(initForm.type)">
         <el-option
           v-for="item in courseTypeList"
@@ -105,7 +100,7 @@ export default {
 </template>
 
 <style lang="postcss">
-.flashcard-form{
+.celebrate-form{
 
 }
 </style>

@@ -94,14 +94,16 @@ export default {
     <div class="init-form__block">
       <el-form-item
         label="前景图片">
-        <AppSelectImage
-          v-model="initForm.scene.foreground"/>
+        <AppSelectCourse
+          v-model="initForm.scene.foreground"
+          course-type="image"/>
       </el-form-item>
 
       <el-form-item
         label="后景图片">
-        <AppSelectImage
-          v-model="initForm.scene.background"/>
+        <AppSelectCourse
+          v-model="initForm.scene.background"
+          course-type="image"/>
       </el-form-item>
     </div>
 

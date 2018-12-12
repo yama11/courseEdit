@@ -55,6 +55,14 @@ export default {
       this.iconIndex = null;
     },
 
+    getBackStyle(scene) {
+      const { foreground, background } = scene;
+
+      return {
+        'background-image': [`url(${background})`, `url(${foreground})`],
+      };
+    },
+
     lookCourse(step) {
       this.$store.commit('lookCourseStep', { step });
     },
@@ -85,10 +93,9 @@ export default {
       @mouseover="showAction(index)"
       @mouseout="hideAction">
 
-      <AppScene
-        :foreground="item.scene.foreground"
-        :background="item.scene.background"
-      >
+      <div
+        :style="getBackStyle(item.scene)"
+        class="app-footer-item__block">
 
         <div
           slot="foreground"
@@ -99,7 +106,6 @@ export default {
             <br>
             {{ typeObj[item.type] }} {{ item.mode }}
           </div>
-
 
           <div
             v-if="iconIndex === index"
@@ -117,8 +123,7 @@ export default {
 
         </div>
 
-
-      </AppScene>
+      </div>
 
     </div>
 
@@ -144,14 +149,23 @@ export default {
   height: 145px;
   margin-top: 2px;
   flex-shrink: 0;
+  background-image:
 }
 
 .app-footer-item__currentStep{
   border: 5px solid gold;
 }
 
+.app-footer-item__block{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
 .app-footer-item__content{
-  font-size: 14px;
+  font-size: 20px;
   text-align: center;
   background: rgba(255,255,255,0.3);
 }

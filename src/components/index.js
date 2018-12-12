@@ -1,17 +1,11 @@
-import AppScene from './AppScene';
 import AppFooter from './AppFooter';
 import AppForm from './AppForm';
-import AppSelectImage from './AppSelectImage';
-import AppSelectVideo from './AppSelectVideo';
-import AppSelectAudio from './AppSelectAudio';
+import AppSelectCourse from './AppSelectCourse';
 
 const components = {
-  AppScene,
   AppFooter,
   AppForm,
-  AppSelectImage,
-  AppSelectVideo,
-  AppSelectAudio,
+  AppSelectCourse,
 };
 
 export default (Vue) => {

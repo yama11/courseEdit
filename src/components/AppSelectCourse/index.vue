@@ -35,6 +35,7 @@ export default {
         video: '视频',
         animate: '动画',
       },
+
     };
   },
 
@@ -66,6 +67,15 @@ export default {
     selectCourse() {
       this.dialogVisible = true;
     },
+
+    changeDialog(item) {
+      this.$emit('changeValue', item);
+      this.dialogVisible = false;
+    },
+
+    showEditor(show) {
+      this.dialogVisible = show;
+    },
   },
 };
 </script>
@@ -96,22 +106,13 @@ export default {
       {{ courseName }}
     </div>
 
-    <el-dialog
-      :visible.sync="dialogVisible"
-      :modal="false"
-      title="提示"
-      width="800px">
-      <span>这是显示图片/音频/视频素材数据</span>
-      <span
-        slot="footer"
-        class="dialog-footer">
-        <el-button
-          type="primary"
-          @click="dialogVisible = false">确 定</el-button>
-        <el-button
-          @click="dialogVisible = false">取 消</el-button>
-      </span>
-    </el-dialog>
+    <AppMaterial
+      v-if="dialogVisible"
+      :show-dialog="dialogVisible"
+      :type-number="courseArr"
+      @changeData="changeDialog"
+      @showEditor="showEditor"
+    />
   </div>
 </template>
 

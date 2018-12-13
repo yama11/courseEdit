@@ -33,7 +33,8 @@ export default {
 
       showNumber: null,
 
-      aaa: null,
+      searchText: '',
+
 
     };
   },
@@ -51,7 +52,7 @@ export default {
     requestUrl(num, page) {
       this.showNumber = num;
       this.loading = true;
-      this.$http.get(`/resource?page=${page}&equal[type]=${num}&per_page=18`)
+      this.$http.get(`/resource?page=${page}&equal[type]=${num}&per_page=18&like[name]=${this.searchText}`)
         .then((res) => {
           this.material.data = [...res.data];
           this.material.total = res.total;
@@ -73,6 +74,7 @@ export default {
 
     selectClick(num) {
       this.material = {};
+      this.searchText = '';
       this.showNumber = num;
       this.requestUrl(this.showNumber, 1);
     },
@@ -84,8 +86,13 @@ export default {
 
     refresh() {
       this.material = {};
+      this.searchText = '';
       this.loading = true;
       this.requestUrl(this.showNumber, 1);
+    },
+
+    searchValue() {
+      this.requestUrl(this.showNumber, 1, this.searchText);
     },
   },
 
@@ -207,31 +214,36 @@ export default {
           </el-button>
         </div>
 
-        <!-- <div
+        <div
           class="list-footer__search"
         >
-          <el-input/>
+          <el-input
+            v-model="searchText"
+            placeholder="请输入搜索内容"
+          />
           <el-button
             icon="el-icon-search"
             class="list-footer__search-button"
+            @click="searchValue"
           />
-        </div> -->
+        </div>
       </footer>
     </div>
   </el-dialog>
 </template>
 
 <style lang="postcss">
-/* .list-footer__search{
+.list-footer__search{
   width: 300px;
-  box-sizing: border-box;
+  position:absolute;
+  right: 0;
 }
-.list-footer__search .el-input__inner{
-  width: 80%;
+.list-footer__search .el-input{
+  width: 70%;
 }
 .list-footer__search-button{
-  width: 20%;
-} */
+  width: 23%;
+}
 .buttonColor{
   color: #409eff;
 }
@@ -240,7 +252,7 @@ img{
   vertical-align: middle;
 }
 .list-footer .list-footer__text{
-  width: 580px;
+  width: 380px;
 }
 .list-footer__text .el-button{
   font-size: 16px;

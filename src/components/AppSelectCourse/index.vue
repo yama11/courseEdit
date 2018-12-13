@@ -69,7 +69,8 @@ export default {
     },
 
     changeDialog(item) {
-      this.$emit('changeValue', item);
+      this.$emit('input', item.preview_url);
+      this.$emit('changValue', item);
       this.dialogVisible = false;
     },
 

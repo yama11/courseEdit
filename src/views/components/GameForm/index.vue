@@ -4,8 +4,14 @@
  *
  * @author suyanping
  */
+import TopicItem from './TopicItem';
+
 export default {
   name: 'GameForm',
+
+  components: {
+    TopicItem,
+  },
 
   props: {
     dataForm: {
@@ -27,10 +33,42 @@ export default {
           background: '',
           foreground: '',
         },
+        mode: 1,
+        src: {
+          gameUrl: '',
+          list: [
+            {
+              title: '',
+              clipUrl: '',
+              options: [
+                { content: '', imgUrl: '', isRightOption: true },
+                { content: '', imgUrl: '', isRightOption: false },
+                { content: '', imgUrl: '', isRightOption: false },
+                { content: '', imgUrl: '', isRightOption: false },
+              ],
+            },
+          ],
+        },
       },
 
       formRules: {
 
+      },
+
+      modeList: [
+        { type: '模式一', value: 1 },
+        { type: '模式二', value: 2 },
+      ],
+
+      initTopic: {
+        title: '',
+        clipUrl: '',
+        options: [
+          { content: '', imgUrl: '', isRightOption: true },
+          { content: '', imgUrl: '', isRightOption: false },
+          { content: '', imgUrl: '', isRightOption: false },
+          { content: '', imgUrl: '', isRightOption: false },
+        ],
       },
 
     };
@@ -51,6 +89,14 @@ export default {
   methods: {
     changeType(type) {
       this.$emit('changeType', type);
+    },
+
+    addTopic() {
+      this.initForm.src.list.push(this.initTopic);
+    },
+
+    sureDelTopic(index) {
+      this.initForm.src.list.splice(index, 1);
     },
 
     submitForm(submit) {
@@ -100,6 +146,32 @@ export default {
           course-type="image"/>
       </el-form-item>
     </div>
+
+    <el-form-item
+      label="模式">
+      <el-select
+        v-model="initForm.mode"
+        placeholder="请选择模式">
+        <el-option
+          v-for="item in modeList"
+          :key="item.value"
+          :label="item.type"
+          :value="item.value"/>
+      </el-select>
+    </el-form-item>
+
+    <el-form-item
+      label="游戏列表">
+      <TopicItem
+        v-model="initForm.src.list"
+        @delTopic="sureDelTopic"/>
+
+      <el-button
+        type="primary"
+        @click="addTopic">
+        新增题目
+      </el-button>
+    </el-form-item>
 
   </AppForm>
 </template>

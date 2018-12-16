@@ -44,6 +44,10 @@ export default {
     clearError() {
       this.$nextTick(() => this.$refs.form.cancel());
     },
+
+    closeLoading() {
+      this.$refs.form.submitCallback();
+    },
   },
 };
 </script>

@@ -5,7 +5,7 @@
  * @author suyanping
  */
 export default {
-  name: 'AppSelectAudio',
+  name: 'AppSelectCourse',
 
   props: {
     value: {
@@ -57,8 +57,10 @@ export default {
 
       const isAnimate = this.courseType === 'animate';
 
+      const animateName = name[name.length - 2] ? `${name[name.length - 2]}.zip` : '';
+
       return isAnimate
-        ? `${name[name.length - 2]}.zip`
+        ? animateName
         : name[name.length - 1];
     },
   },
@@ -77,12 +79,16 @@ export default {
     showEditor(show) {
       this.dialogVisible = show;
     },
+
+    delCourse() {
+      this.$emit('input', '');
+    },
   },
 };
 </script>
 
 <template>
-  <div>
+  <div class="app-select-course">
     <div
       v-if="courseType === 'image'"
       class="init-form__picture"
@@ -105,6 +111,10 @@ export default {
 
     <div>
       {{ courseName }}
+      <i
+        v-if="courseName"
+        class="el-icon-error app-select-course__icon"
+        @click="delCourse"/>
     </div>
 
     <AppMaterial
@@ -118,5 +128,7 @@ export default {
 </template>
 
 <style lang="postcss">
-
+.app-select-course__icon{
+  cursor: pointer;
+}
 </style>

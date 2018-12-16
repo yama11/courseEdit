@@ -27,11 +27,20 @@ export default {
           background: '',
           foreground: '',
         },
+        src: {
+          background: '',
+          foreground: '',
+        },
       },
 
       formRules: {
 
       },
+
+      modeList: [
+        { type: '模式一', value: 1 },
+        { type: '模式二', value: 2 },
+      ],
 
     };
   },
@@ -54,6 +63,14 @@ export default {
     },
 
     submitForm(submit) {
+      if (!this.initForm.src.foreground && !this.initForm.src.background) {
+        this.$message.error('请选择一个动画');
+
+        this.$refs.form.closeLoading();
+
+        return;
+      }
+
       submit();
     },
   },
@@ -62,6 +79,7 @@ export default {
 
 <template>
   <AppForm
+    ref="form"
     :visible="isShow"
     :model="initForm"
     :rules="formRules"
@@ -98,6 +116,35 @@ export default {
         <AppSelectCourse
           v-model="initForm.scene.background"
           course-type="image"/>
+      </el-form-item>
+    </div>
+
+    <el-form-item
+      label="模式">
+      <el-select
+        v-model="initForm.mode"
+        placeholder="请选择模式">
+        <el-option
+          v-for="item in modeList"
+          :key="item.value"
+          :label="item.type"
+          :value="item.value"/>
+      </el-select>
+    </el-form-item>
+
+    <div class="init-form__block">
+      <el-form-item
+        label="前景动画">
+        <AppSelectCourse
+          v-model="initForm.src.foreground"
+          course-type="animate"/>
+      </el-form-item>
+
+      <el-form-item
+        label="后景动画">
+        <AppSelectCourse
+          v-model="initForm.src.background"
+          course-type="animate"/>
       </el-form-item>
     </div>
 

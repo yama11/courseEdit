@@ -102,11 +102,7 @@ export default {
 
       this.getviewComponentName(data.type);
 
-      this.dataForm = { ...data };
-    },
-
-    submitForm(submit) {
-      submit();
+      this.dataForm = JSON.parse(JSON.stringify(data));
     },
 
     getviewComponentName(type) {
@@ -116,6 +112,10 @@ export default {
     },
 
     getCurrType(type) {
+      const data = this.state.assets[this.state.section][this.step];
+
+      this.dataForm = JSON.parse(JSON.stringify(data));
+
       this.getviewComponentName(type);
     },
 

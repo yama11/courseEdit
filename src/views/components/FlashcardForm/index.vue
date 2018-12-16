@@ -54,6 +54,8 @@ export default {
 
       },
 
+      selectList: ['A', 'B', 'C', 'D'],
+
       mode: null,
 
       initSrc: {},
@@ -65,33 +67,6 @@ export default {
         { type: '模式二', value: 2 },
         { type: '模式三', value: 3 },
         { type: '模式四', value: 4 },
-      ],
-
-      srcList: [
-        {
-          cards: [
-            { url: '', text: '' }, { url: '', text: '' },
-            { url: '', text: '' }, { url: '', text: '' },
-          ],
-        },
-        {
-          answer: { select: 'A', url: '' },
-          topic: [],
-          options: [],
-        },
-        {
-          answer: { select: 'A', url: '', text: '' },
-          topic: { audio: '' },
-          options: [
-            { url: '', text: '' }, { url: '', text: '' },
-            { url: '', text: '' }, { url: '', text: '' },
-          ],
-        },
-        {
-          answer: { select: 'A', url: '' },
-          topic: [],
-          options: [{ url: '' }, { url: '' }, { url: '' }, { url: '' }],
-        },
       ],
 
     };
@@ -115,7 +90,7 @@ export default {
     if (this.dataForm.type === this.initForm.type) {
       this.initForm = { ...this.dataForm };
       this.mode = this.initForm.mode;
-      this.initSrc = this.initForm.src;
+      this.initSrc = { ...this.initForm.src };
     }
   },
 
@@ -128,13 +103,40 @@ export default {
       if (mode === this.mode) {
         this.initForm = {
           ...this.initForm,
-          src: this.initSrc,
+          src: { ...this.initSrc },
         };
 
         return;
       }
 
-      const src = this.srcList[this.initForm.mode - 1];
+      const srcList = [
+        {
+          cards: [
+            { url: '', text: '' }, { url: '', text: '' },
+            { url: '', text: '' }, { url: '', text: '' },
+          ],
+        },
+        {
+          answer: { select: 'A', url: '' },
+          topic: ['', '', ''],
+          options: ['', '', ''],
+        },
+        {
+          answer: { select: 'A', url: '', text: '' },
+          topic: { audio: '' },
+          options: [
+            { url: '', text: '' }, { url: '', text: '' },
+            { url: '', text: '' },
+          ],
+        },
+        {
+          answer: { select: 'A', url: '' },
+          topic: [],
+          options: [{ url: '' }, { url: '' }, { url: '' }],
+        },
+      ];
+
+      const src = srcList[this.initForm.mode - 1];
 
       this.initForm = {
         ...this.initForm,
@@ -156,7 +158,7 @@ export default {
     :rules="formRules"
     object="Flashcard编辑"
     class="flashcard-form"
-    label-width="80px"
+    label-width="100px"
     @on-submit="submitForm"
     @dialogHide="$emit('changeDialog')">
 
@@ -204,14 +206,12 @@ export default {
       </el-select>
     </el-form-item>
 
-    <el-form-item
-      label="内容">
-      <component
-        :is="viewModeName"
-        :key="viewModeKey"
-        :content="initForm.src"
-      />
-    </el-form-item>
+    <component
+      :is="viewModeName"
+      :key="viewModeKey"
+      :content="initForm.src"
+      :select-list="selectList"
+    />
 
   </AppForm>
 </template>

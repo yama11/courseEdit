@@ -12,6 +12,11 @@ export default {
       type: Object,
       default: () => {},
     },
+
+    selectList: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   data() {
@@ -27,35 +32,39 @@ export default {
 </script>
 
 <template>
-  <div class="flashcard-mode-one">
-    <div
-      v-for="(item,index) in content.cards"
-      :key="index"
-      class="flashcard-mode-one__block">
-      <div class="flashcard-mode-one__index">
-        <span>{{ index + 1 }}.</span>
-        <AppSelectCourse
-          v-model="item.url"
-          course-type="image"
-          class="flashcard-mode-one__select"/>
+  <el-form-item
+    label="选项">
+    <div class="flashcard-mode-one">
+      <div
+        v-for="(item,index) in content.cards"
+        :key="index"
+        class="flashcard-mode-one__block">
+        <div class="flashcard-mode-one__index">
+          <span>{{ selectList[index] }}</span>
+          <AppSelectCourse
+            v-model="item.url"
+            course-type="image"
+            class="flashcard-mode-one__select"/>
+        </div>
+        <el-input
+          v-model="item.text"
+          placeholder="请输入内容"
+          class="flashcard-mode-one__text"/>
       </div>
-      <el-input
-        v-model="item.text"
-        placeholder="请输入内容"
-        class="flashcard-mode-one__text"/>
     </div>
-  </div>
+  </el-form-item>
 </template>
 
 <style lang="postcss">
 .flashcard-mode-one{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .flashcard-mode-one__block{
   position: relative;
-  margin-left: 30px;
+  width: 40%;
   margin-top: 20px;
 }
 
